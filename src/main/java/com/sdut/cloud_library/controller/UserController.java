@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.sdut.cloud_library.common.R;
 import com.sdut.cloud_library.entity.User;
 import com.sdut.cloud_library.service.UserService;
+import com.sdut.cloud_library.util.TokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
@@ -47,7 +48,8 @@ public class UserController {
             return R.error("登录失败");
         }
 
-        return R.success(u);
+        String token = TokenUtil.sign(u);
+        return R.success(u,token);
     }
 
 }
